@@ -22,5 +22,21 @@ export const productFail = (error) => {
 	};
 };
 
+export const getProducts = () => {
+	return dispatch => {
+		ProductController.getProducts()
+			.then((result) => {
+				if (result.status === 200) {
+					dispatch(productSuccess(result.data.data));
+				} else {
+					dispatch(productFail('Something went wrong!'));
+				}
+			})
+			.catch((error) => {
+				dispatch(productFail(error));
+			});
+	}
+};
+
 
 

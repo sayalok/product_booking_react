@@ -1,5 +1,5 @@
-import BaseController from "./BaseController";
-import { endpoint } from "./EndPoint";
+import BaseController from "./../BaseController";
+import { endpoint } from "./../EndPoint";
 
 export default class ProductController extends BaseController {
 	constructor() {}

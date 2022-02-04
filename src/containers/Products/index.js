@@ -1,10 +1,20 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+
+import { connect } from "react-redux";
+import * as actions from "./../../store/actions/";
+
+import Loader from './../../components/Loader'
+
 import BookProductModal from "../../components/Products/BookProductModal";
 import ProductActionButton from "../../components/Products/ProductActionButton";
 import ProductsList from "../../components/Products/ProductsList";
 import ReturnProductModal from "../../components/Products/ReturnProductModal";
 
 const Products = (props) => {
+
+    useEffect(() => {
+        props.getProducts();
+      }, []);
 
     const [showBookModal, setBookModalShow] = useState(false);
     const [showReturnModal, setReturnModalShow] = useState(false);
@@ -18,9 +28,15 @@ const Products = (props) => {
         setReturnModalShow(!showReturnModal)
     }
 
+    let productListBlock = <Loader/>;
+    if (props.productData) {
+        productListBlock = <ProductsList productListData={props.productData}/>
+    }
+
 	return (
         <>
-            <ProductsList></ProductsList>
+            {productListBlock}
+            
             <ProductActionButton
                 onBookBtnClick={() => handleBookingClick()}
                 onReturnBtnClick={() => handleReturnClick()}
@@ -42,4 +58,18 @@ const Products = (props) => {
 };
 
 
-export default Products;
+
+const mapStateToProps = (state) => {
+    return {
+        productData: state.productReducers.productData,
+    };
+};
+  
+const mapDispatchToProp = (dispatch) => {
+    return {
+        getProducts: () => dispatch(actions.getProducts()),
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProp)(Products);
