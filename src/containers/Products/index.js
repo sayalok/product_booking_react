@@ -24,35 +24,40 @@ const Products = (props) => {
     }
 
     const handleReturnClick = () => {
-        console.log('here');
         setReturnModalShow(!showReturnModal)
     }
 
-    let productListBlock = <Loader/>;
+    let productBlock = <Loader/>;
     if (props.productData) {
-        productListBlock = <ProductsList productListData={props.productData}/>
+        productBlock = (
+            <>
+                <ProductsList productListData={props.productData}/>
+                <ProductActionButton
+                    onBookBtnClick={() => handleBookingClick()}
+                    onReturnBtnClick={() => handleReturnClick()}
+                >
+                </ProductActionButton>
+
+
+                <BookProductModal
+                    productListData={props.productData}
+                    bookMoladStatus={showBookModal}
+                    onBookBtnClick={() => handleBookingClick()}
+                ></BookProductModal>
+
+                <ReturnProductModal
+                    productListData={props.productData}
+                    returnMoladStatus={showReturnModal}
+                    onReturnBtnClick={() => handleReturnClick()}
+                ></ReturnProductModal>    
+        
+            </>
+        )
     }
 
 	return (
         <>
-            {productListBlock}
-            
-            <ProductActionButton
-                onBookBtnClick={() => handleBookingClick()}
-                onReturnBtnClick={() => handleReturnClick()}
-            >
-            </ProductActionButton>
-
-
-            <BookProductModal
-                bookMoladStatus={showBookModal}
-                onBookBtnClick={() => handleBookingClick()}
-            ></BookProductModal>
-
-            <ReturnProductModal
-                returnMoladStatus={showReturnModal}
-                onReturnBtnClick={() => handleReturnClick()}
-            ></ReturnProductModal>
+            {productBlock}
         </>
     );
 };
