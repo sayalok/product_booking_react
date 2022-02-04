@@ -1,12 +1,11 @@
 import React from "react";
-import Loader from "./components/Loader";
 
 //Components
 import Layout from "./components/Layout";
+import Products from "./containers/Products";
 
 const App = (props) => {
-	let router = <Loader/>;
-	return <Layout>{router}</Layout>;
+	return <Layout><Products/></Layout>;
 };
 
 
