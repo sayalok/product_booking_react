@@ -3,5 +3,6 @@ export {
 } from "./ProductAction";
 
 export {
-    getBookings
+    getBookings,
+    insertBooking
 } from "./BookingAction";

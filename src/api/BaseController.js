@@ -8,4 +8,8 @@ export default class BaseController {
 	static axiosGet(path) {
 		return axios.get(this.baseUrl + path);
 	}
+
+	static axiosPost(path, data, config) {
+		return axios.post(this.baseUrl + path, data, config);
+	}
 }

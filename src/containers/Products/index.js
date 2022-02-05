@@ -29,6 +29,7 @@ const Products = (props) => {
 
     const handleSubmitBookingData = (data) => {
         console.log(data);
+        props.insertBooking(data)
     }
 
     const handleSubmitRentalData = (data) => {
@@ -88,6 +89,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProp = (dispatch) => {
     return {
         getProducts: () => dispatch(actions.getProducts()),
+        insertBooking: (data) => dispatch(actions.insertBooking(data))
     };
 };
 

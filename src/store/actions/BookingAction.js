@@ -24,6 +24,7 @@ export const bookingFail = (error) => {
 
 export const getBookings = () => {
 	return dispatch => {
+		dispatch(bookingInit());
 		BookingController.getBookings()
 			.then((result) => {
 				if (result.status === 200) {
@@ -36,6 +37,20 @@ export const getBookings = () => {
 				dispatch(bookingFail(error));
 			});
 	}
+};
+
+export const insertBooking = (data) => {
+	return (dispatch) => {
+		dispatch(bookingInit());
+
+		BookingController.insertBookingData(data)
+			.then((result) => {
+				console.log(result);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 };
 
 
