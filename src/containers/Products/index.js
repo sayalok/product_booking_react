@@ -28,17 +28,24 @@ const Products = (props) => {
     }
 
     let productBlock = <Loader/>;
+    let productActionBtnBlock;
+
+
+
     if (props.productData) {
-        productBlock = (
-            <>
-                <ProductsList productListData={props.productData}/>
+        if (props.productData.length > 0 ) {
+            productActionBtnBlock = (
                 <ProductActionButton
                     onBookBtnClick={() => handleBookingClick()}
                     onReturnBtnClick={() => handleReturnClick()}
                 >
                 </ProductActionButton>
-
-
+            )
+        }
+        productBlock = (
+            <>
+                <ProductsList productListData={props.productData}/>
+                {productActionBtnBlock}
                 <BookProductModal
                     productListData={props.productData}
                     bookMoladStatus={showBookModal}

@@ -7,6 +7,4 @@ export default class ProductController extends BaseController {
 	static getProducts() {
 		return BaseController.axiosGet(endpoint.ALL_PRODUCT);
 	}
-
-
 }
