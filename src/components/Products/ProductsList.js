@@ -20,7 +20,7 @@ const ProductsList = (props) => {
                     <td>{item.needing_repair ? 'True' : 'False'}</td>
                     <td>{item.durability}</td>
                     <td>{item.max_durability}</td>
-                    <td>{item.mileage}</td>
+                    <td>{item.mileage ? item.mileage : 'N/a'}</td>
                     <td>{item.price}</td>
                     <td>{item.minimum_rent_period}</td>
                 </tr>

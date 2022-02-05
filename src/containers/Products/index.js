@@ -27,10 +27,12 @@ const Products = (props) => {
         setReturnModalShow(!showReturnModal)
     }
 
+    const handleSubmitBookingData = (data) => {
+        console.log(data);
+    }
+
     let productBlock = <Loader/>;
     let productActionBtnBlock;
-
-
 
     if (props.productData) {
         if (props.productData.length > 0 ) {
@@ -50,6 +52,7 @@ const Products = (props) => {
                     productListData={props.productData}
                     bookMoladStatus={showBookModal}
                     onBookBtnClick={() => handleBookingClick()}
+                    onBookDataSubmit={(data) => handleSubmitBookingData(data)}
                 ></BookProductModal>
 
                 <ReturnProductModal

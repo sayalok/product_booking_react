@@ -12,10 +12,10 @@ const ModalComponent = (props) => {
                 <Modal.Body>
                     {props.children}
                 </Modal.Body>
-                <Modal.Footer>
+                {/* <Modal.Footer>
                     <Button variant="secondary" onClick={() => props.modalCloseHandler()}>No</Button>
                     <Button variant="primary">Yes</Button>
-                </Modal.Footer>
+                </Modal.Footer> */}
             </Modal>
         </>
     );
