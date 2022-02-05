@@ -1,3 +1,4 @@
 export const endpoint = {
-	ALL_PRODUCT: "products/list",
+	ALL_PRODUCT: "products/",
+	ALL_Booking: "booking/",
 };

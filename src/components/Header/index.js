@@ -1,5 +1,6 @@
 import React from "react";
 import {Container,Navbar, Nav } from 'react-bootstrap';
+import { Link, useLocation } from "react-router-dom";
 
 const Header = (props) => {
 	return (
@@ -9,9 +10,18 @@ const Header = (props) => {
 					<Navbar.Brand href="#home">Test Project</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto">
-							<Nav.Link href="#home">Home</Nav.Link>
-						</Nav>
+						<Link
+							to="/"
+							className='me-auto'
+						>
+							Home
+						</Link>
+						<Link
+							to="/booking_list"
+							className='me-auto'
+						>
+							Booking List
+						</Link>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

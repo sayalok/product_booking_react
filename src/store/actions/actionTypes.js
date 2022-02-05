@@ -1,3 +1,7 @@
 export const PRODUCT_INIT = "PRODUCT_INIT";
 export const PRODUCT_SUCCESS = "PRODUCT_SUCCESS";
 export const PRODUCT_FAIL = "PRODUCT_FAIL";
+
+export const BOOKING_INIT = "BOOKING_INIT";
+export const BOOKING_SUCCESS = "BOOKING_SUCCESS";
+export const BOOKING_FAIL = "BOOKING_FAIL";
