@@ -31,6 +31,10 @@ const Products = (props) => {
         console.log(data);
     }
 
+    const handleSubmitRentalData = (data) => {
+        console.log(data);
+    }
+
     let productBlock = <Loader/>;
     let productActionBtnBlock;
 
@@ -59,6 +63,7 @@ const Products = (props) => {
                     productListData={props.productData}
                     returnMoladStatus={showReturnModal}
                     onReturnBtnClick={() => handleReturnClick()}
+                    onRentalDataSubmit={(data) => handleSubmitRentalData(data)}
                 ></ReturnProductModal>    
         
             </>

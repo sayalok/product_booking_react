@@ -22,7 +22,11 @@ const BookProductModal = (props) => {
 
     let productOptions
     if (props.productListData && props.productListData.length > 0) {
-        productOptions = props.productListData.map((item,index) =>  <option key={index} value={item.id}>{item.name}</option>)
+        productOptions = props.productListData.map((item,index) =>  {
+            if (item.availability == 1) {
+                return <option key={index} value={item.id}>{item.name}</option>
+            }
+        })
     }
 
     const onsubmit = e => {

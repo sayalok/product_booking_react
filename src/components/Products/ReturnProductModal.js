@@ -22,6 +22,23 @@ const ReturnProductModal = (props) => {
         estimatePrice: 0
 	});
 
+    const onsubmit = e => {
+        e.preventDefault()
+        setShowConfirmDialog(true)
+    }
+
+    const onConfirmFormSubmit = e => {
+        e.preventDefault()
+        const data = {
+			"product_name": getFieldValue.product_name,
+			"product_book_from_date": getFieldValue.product_book_from_date,
+			"product_book_to_date": getFieldValue.product_book_to_date,
+			"estimatePrice": getFieldValue.estimatePrice
+		}
+
+        props.onRentalDataSubmit(data)
+    }
+
 
     let productOptions
     if (props.productListData && props.productListData.length > 0) {
@@ -36,17 +53,19 @@ const ReturnProductModal = (props) => {
 		setFieldValue(getFieldValue);
 
         if (getFieldValue.product_name !== '' && getFieldValue.product_book_from_date !== '' && getFieldValue.product_book_to_date !== '') {
+            let totalDays = moment(getFieldValue.product_book_to_date).diff(moment(getFieldValue.product_book_from_date), 'days')+1;
             let product = props.productListData.filter(item => {
                 if (item.id == getFieldValue.product_name) {
                     if (item.mileage != null) {
                         setShowmilageInput(true)
             			setSubmitBtnDisabled(true)
                         if (getFieldValue.product_used_milage !== '' ) {
-
+                            getFieldValue['estimatePrice'] = totalDays * item.price
+                            setSubmitBtnDisabled(false)
                         }
                     }else{
+                        getFieldValue['estimatePrice'] = totalDays * item.price
             			setSubmitBtnDisabled(false)
-
                     }
                 }
             })
@@ -71,7 +90,7 @@ const ReturnProductModal = (props) => {
     }
 
     let returnModalBody = (
-        <Form>
+        <Form onSubmit={onsubmit}>
             <Form.Group className="mb-3">
                 <Form.Label>Email address</Form.Label>
                 <Form.Select
@@ -109,17 +128,17 @@ const ReturnProductModal = (props) => {
         </Form>
     )
 
-    // if (showConfirmDialog) {
-    //     returnModalBody = (
-    //         <Form onSubmit={onConfirmFormSubmit}>
-    //             <p className="text-center">Your total price is </p>
-    //             <p className="text-center">Do you want to complete?</p>
-    //             <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
-    //                 <Button size="md" type="submit" disabled={submitBtnDisabled}>Confirm</Button>
-    //             </ButtonToolbar>
-    //         </Form>
-    //     )
-    // }
+    if (showConfirmDialog) {
+        returnModalBody = (
+            <Form onSubmit={onConfirmFormSubmit}>
+                <p className="text-center">Your total price is {getFieldValue.estimatePrice}</p>
+                <p className="text-center">Do you want to complete?</p>
+                <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
+                    <Button size="md" type="submit" disabled={submitBtnDisabled}>Confirm</Button>
+                </ButtonToolbar>
+            </Form>
+        )
+    }
 
 	return (
         <>

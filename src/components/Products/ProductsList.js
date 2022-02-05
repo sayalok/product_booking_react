@@ -1,20 +1,11 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+// import { Table } from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import './product.css'
 const ProductsList = (props) => {
-    let productListRow = (
-        <p className="text-center">
-            No Data Available
-        </p>
-    )
-
    
-
     const columns = [{
-        dataField: () => {
-            return 1
-        },
+        dataField: 'id',
         text: 'Id',
         sort:true
       }, {
