@@ -7,6 +7,7 @@ import AlertMessage from "../UI/Alert/AlertMessage";
 const BookProductModal = (props) => {
 
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true)
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false)
     const [alertState, setAlertState] = useState({
         isShow: false,
         variantType: '',
@@ -16,6 +17,7 @@ const BookProductModal = (props) => {
 		product_name: "",
 		product_book_from_date: "",
 		product_book_to_date: "",
+        estimatePrice: 0
 	});
 
     let productOptions
@@ -23,12 +25,18 @@ const BookProductModal = (props) => {
         productOptions = props.productListData.map((item,index) =>  <option key={index} value={item.id}>{item.name}</option>)
     }
 
-    const onsubmit = (e) => {
+    const onsubmit = e => {
+        e.preventDefault()
+        setShowConfirmDialog(true)
+    }
+
+    const onConfirmFormSubmit = e => {
         e.preventDefault()
         const data = {
 			"product_name": getFieldValue.product_name,
 			"product_book_from_date": getFieldValue.product_book_from_date,
-			"product_book_to_date": getFieldValue.product_book_to_date
+			"product_book_to_date": getFieldValue.product_book_to_date,
+			"estimatePrice": getFieldValue.estimatePrice
 		}
 
         props.onBookDataSubmit(data)
@@ -46,7 +54,7 @@ const BookProductModal = (props) => {
             let product = props.productListData.filter(item => {
                 if (item.id == getFieldValue.product_name) {
                     if (item.minimum_rent_period <= totalDays) {
-                        
+                        getFieldValue['estimatePrice'] = totalDays * item.price
                         setSubmitBtnDisabled(false)
                     }else{
                         setAlertState({
@@ -64,6 +72,56 @@ const BookProductModal = (props) => {
 		}
     }
 
+    let bookModalBody = (
+        <Form onSubmit={onsubmit}>
+            <Form.Group className="mb-3">
+                <Form.Select
+                    name="product_name"
+                    id="product_name"
+                    onChange={(e) => handleChange(e)}
+                >
+                    <option>Select Product</option>
+                    {productOptions}
+                </Form.Select>
+            </Form.Group>
+        
+            <Row className="mb-3">
+                <Form.Group as={Col}>
+                    <Form.Label>From</Form.Label>
+                    <Form.Control 
+                        type="date"
+                        name="product_book_from_date"
+                        id="product_book_from_date"
+                        onChange={(e) => handleChange(e)}/>
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                    <Form.Label>To</Form.Label>
+                    <Form.Control 
+                        type="date"
+                        name="product_book_to_date"
+                        id="product_book_to_date"
+                        onChange={(e) => handleChange(e)}/>
+                </Form.Group>
+            </Row>
+            <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
+                <Button size="md" type="submit" disabled={submitBtnDisabled}>Submit</Button>
+            </ButtonToolbar>
+        </Form>
+    )
+
+    if (showConfirmDialog) {
+        bookModalBody = (
+            <Form onSubmit={onConfirmFormSubmit}>
+                <p className="text-center">Your total price is {getFieldValue.estimatePrice}</p>
+                <p className="text-center">Do you want to complete?</p>
+                <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
+                    <Button size="md" type="submit" disabled={submitBtnDisabled}>Confirm</Button>
+                </ButtonToolbar>
+            </Form>
+        )
+    }
+
 	return (
         <>
             <ModalComponent 
@@ -71,41 +129,7 @@ const BookProductModal = (props) => {
                 modalCloseHandler={() => props.onBookBtnClick()}
                 modalTitle="Book a product">
                     <AlertMessage variantType={alertState.variantType} alertShowStatus={alertState.isShow}>{alertState.message}</AlertMessage>
-                    <Form onSubmit={onsubmit}>
-                        <Form.Group className="mb-3">
-                            <Form.Select
-                                name="product_name"
-                                id="product_name"
-                                onChange={(e) => handleChange(e)}
-                            >
-                                <option>Select Product</option>
-                                {productOptions}
-                            </Form.Select>
-                        </Form.Group>
-                    
-                        <Row className="mb-3">
-                            <Form.Group as={Col}>
-                                <Form.Label>From</Form.Label>
-                                <Form.Control 
-                                    type="date"
-                                    name="product_book_from_date"
-                                    id="product_book_from_date"
-                                    onChange={(e) => handleChange(e)}/>
-                            </Form.Group>
-
-                            <Form.Group as={Col}>
-                                <Form.Label>To</Form.Label>
-                                <Form.Control 
-                                    type="date"
-                                    name="product_book_to_date"
-                                    id="product_book_to_date"
-                                    onChange={(e) => handleChange(e)}/>
-                            </Form.Group>
-                        </Row>
-                        <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
-                            <Button size="md" type="submit" disabled={submitBtnDisabled}>Submit</Button>
-                        </ButtonToolbar>
-                    </Form>
+                    {bookModalBody}
             </ModalComponent>
         </>
     );
