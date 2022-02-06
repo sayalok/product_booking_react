@@ -6,3 +6,8 @@ export {
     getBookings,
     insertBooking
 } from "./BookingAction";
+
+export {
+    getReturns,
+    insertReturn
+} from "./ReturnAction";
