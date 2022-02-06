@@ -5,3 +5,7 @@ export const PRODUCT_FAIL = "PRODUCT_FAIL";
 export const BOOKING_INIT = "BOOKING_INIT";
 export const BOOKING_SUCCESS = "BOOKING_SUCCESS";
 export const BOOKING_FAIL = "BOOKING_FAIL";
+
+export const RETURN_INIT = "RETURN_INIT";
+export const RETURN_SUCCESS = "RETURN_SUCCESS";
+export const RETURN_FAIL = "RETURN_FAIL";

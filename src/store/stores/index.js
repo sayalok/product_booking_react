@@ -11,11 +11,13 @@
  //reducers
  import productReducers from "../reducers/ProductReducer";
  import bookingReducers from "../reducers/BookingReducer";
+ import returnReducers from "../reducers/ReturnReducer";
  
  
  const rootReducers = combineReducers({
     productReducers: productReducers,
     bookingReducers: bookingReducers,
+	returnReducers:returnReducers
  });
  
  // Enable debugger for development purpose will be remove when in production
