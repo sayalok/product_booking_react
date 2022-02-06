@@ -1,6 +1,6 @@
 import React from "react";
-import {Container,Navbar, Nav, NavItem } from 'react-bootstrap';
-import { Link, useLocation } from "react-router-dom";
+import {Container,Navbar, Nav } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
 	return (

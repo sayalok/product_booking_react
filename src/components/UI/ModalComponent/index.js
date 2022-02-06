@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal,Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 
 const ModalComponent = (props) => {
@@ -12,10 +12,6 @@ const ModalComponent = (props) => {
                 <Modal.Body>
                     {props.children}
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={() => props.modalCloseHandler()}>No</Button>
-                    <Button variant="primary">Yes</Button>
-                </Modal.Footer> */}
             </Modal>
         </>
     );

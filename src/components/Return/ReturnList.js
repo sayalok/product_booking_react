@@ -24,7 +24,7 @@ const ReturnList = (props) => {
         sort:true
 
       },{
-        dataField: 'product_id',
+        dataField: 'product',
         text: 'Product Name',
         sort:true
 

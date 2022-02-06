@@ -8,11 +8,7 @@ const ReturnProductModal = (props) => {
     const [showConfirmDialog, setShowConfirmDialog] = useState(false)
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true)
     const [showmilageInput, setShowmilageInput] = useState(false)
-    const [alertState, setAlertState] = useState({
-        isShow: false,
-        variantType: '',
-        message: ''
-    });
+   
 
     let [getFieldValue, setFieldValue] = useState({
 		product_name: "",
