@@ -126,6 +126,11 @@ const BookProductModal = (props) => {
         )
     }
 
+    if (props.postBookingStatus != null) {
+        let msg = props.postBookingStatus ? "Success!" : 'Failed'
+        bookModalBody = <p className="text-center alert-success">{msg}</p>
+    }
+
 	return (
         <>
             <ModalComponent 

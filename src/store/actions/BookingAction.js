@@ -8,9 +8,10 @@ export const bookingInit = () => {
 	};
 };
 
-export const bookingSuccess = (bookingData) => {
+export const bookingSuccess = (bookingData,msg) => {
 	return {
 		type: actionTypes.BOOKING_SUCCESS,
+		successMsg: msg,
 		bookingData: bookingData,
 	};
 };
@@ -28,7 +29,7 @@ export const getBookings = () => {
 		BookingController.getBookings()
 			.then((result) => {
 				if (result.status === 200) {
-					dispatch(bookingSuccess(result.data.data));
+					dispatch(bookingSuccess(result.data.data,'success'));
 				} else {
 					dispatch(bookingFail('Something went wrong!'));
 				}
@@ -45,10 +46,14 @@ export const insertBooking = (data) => {
 
 		BookingController.insertBookingData(data)
 			.then((result) => {
-				console.log(result);
+				if (result.data.status == 'Success') {
+					dispatch(bookingSuccess([],'success'));
+				}else{
+					dispatch(bookingFail('failed'));
+				}
 			})
 			.catch((error) => {
-				console.log(error);
+				dispatch(bookingFail(error));
 			});
 	};
 };

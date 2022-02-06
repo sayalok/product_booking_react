@@ -8,9 +8,10 @@ export const returnInit = () => {
 	};
 };
 
-export const returnSuccess = (returnData) => {
+export const returnSuccess = (returnData,msg) => {
 	return {
 		type: actionTypes.RETURN_SUCCESS,
+		successMsg: msg,
 		returnData: returnData,
 	};
 };
@@ -28,7 +29,7 @@ export const getReturns = () => {
 		ReturnController.getReturns()
 			.then((result) => {
 				if (result.status === 200) {
-					dispatch(returnSuccess(result.data.data));
+					dispatch(returnSuccess(result.data.data,'success'));
 				} else {
 					dispatch(returnFail('Something went wrong!'));
 				}
@@ -45,10 +46,14 @@ export const insertReturn = (data) => {
 
 		ReturnController.insertReturnData(data)
 			.then((result) => {
-				console.log(result);
+				if (result.data.status == 'Success') {
+					dispatch(returnSuccess([],'success'));
+				}else{
+					dispatch(returnFail('failed'));
+				}
 			})
 			.catch((error) => {
-				console.log(error);
+				dispatch(returnFail(error));
 			});
 	};
 };

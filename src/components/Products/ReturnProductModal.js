@@ -19,7 +19,6 @@ const ReturnProductModal = (props) => {
 		product_book_from_date: "",
 		product_book_to_date: "",
         product_used_milage: 0,
-        estimatePrice: 0
 	});
 
     const onsubmit = e => {
@@ -33,7 +32,8 @@ const ReturnProductModal = (props) => {
 			"product_name": getFieldValue.product_name,
 			"product_book_from_date": getFieldValue.product_book_from_date,
 			"product_book_to_date": getFieldValue.product_book_to_date,
-			"estimatePrice": getFieldValue.estimatePrice
+			"estimatePrice": getFieldValue.estimatePrice,
+			"milage": getFieldValue.product_used_milage
 		}
 
         props.onRentalDataSubmit(data)
@@ -138,6 +138,11 @@ const ReturnProductModal = (props) => {
                 </ButtonToolbar>
             </Form>
         )
+    }
+
+    if (props.postReturnStatus != null) {
+        let msg = props.postReturnStatus ? "Success!" : 'Failed'
+        returnModalBody = <p className="text-center alert-success">{msg}</p>
     }
 
 	return (

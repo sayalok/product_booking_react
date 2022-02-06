@@ -19,7 +19,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                bookingData: action.bookingData
+                bookingData: action.bookingData,
+                success: action.successMsg
             };
 
         case actionTypes.BOOKING_FAIL:

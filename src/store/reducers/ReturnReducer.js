@@ -19,7 +19,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                returnData: action.returnData
+                returnData: action.returnData,
+                success: action.successMsg
             };
 
         case actionTypes.RETURN_FAIL:
