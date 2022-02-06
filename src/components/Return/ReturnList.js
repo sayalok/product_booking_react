@@ -28,6 +28,11 @@ const ReturnList = (props) => {
         text: 'Product Name',
         sort:true
 
+      },{
+        dataField: 'milage',
+        text: 'Milage',
+        sort:true
+
       }];
 
 	return  <BootstrapTable  keyField='id' data={ props.returnListData } columns={ columns }  loading={ true } />       

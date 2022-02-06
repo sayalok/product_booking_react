@@ -6,7 +6,7 @@ import * as actions from "../../store/actions";
 import Loader from '../../components/Loader'
 import ReturnList from "../../components/Return/ReturnList";
 
-const Returns = (props) => {
+const ReturnProducts = (props) => {
 
     useEffect(() => {
         props.getReturnList();
@@ -17,7 +17,7 @@ const Returns = (props) => {
     if (props.returnData) {
         returnBlock = (
             <>
-                <BookingList returnListData={props.returnData}/>
+                <ReturnList returnListData={props.returnData}/>
             </>
         )
     }
@@ -44,4 +44,4 @@ const mapDispatchToProp = (dispatch) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProp)(Returns);
+export default connect(mapStateToProps, mapDispatchToProp)(ReturnProducts);

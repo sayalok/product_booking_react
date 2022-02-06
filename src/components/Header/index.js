@@ -1,5 +1,5 @@
 import React from "react";
-import {Container,Navbar, Nav } from 'react-bootstrap';
+import {Container,Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link, useLocation } from "react-router-dom";
 
 const Header = (props) => {
@@ -10,18 +10,11 @@ const Header = (props) => {
 					<Navbar.Brand href="#home">Test Project</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
-						<Link
-							to="/"
-							className='me-auto'
-						>
-							Home
-						</Link>
-						<Link
-							to="/booking_list"
-							className='me-auto'
-						>
-							Booking List
-						</Link>
+						<Nav className="me-auto">
+							<Nav.Link as={Link} to="/">Home</Nav.Link>
+							<Nav.Link as={Link} to="/booking_list">Booking List</Nav.Link>
+							<Nav.Link as={Link} to="/return_list">Return List</Nav.Link>
+						</Nav>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

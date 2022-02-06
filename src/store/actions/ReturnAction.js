@@ -8,14 +8,14 @@ export const returnInit = () => {
 	};
 };
 
-export const returnSuccess = (bookingData) => {
+export const returnSuccess = (returnData) => {
 	return {
 		type: actionTypes.RETURN_SUCCESS,
 		returnData: returnData,
 	};
 };
 
-export const bookingFail = (error) => {
+export const returnFail = (error) => {
 	return {
 		type: actionTypes.RETURN_FAIL,
 		error: error,
