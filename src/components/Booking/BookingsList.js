@@ -24,7 +24,7 @@ const ProductsList = (props) => {
         sort:true
 
       },{
-        dataField: 'product',
+        dataField: 'product.name',
         text: 'Product Name',
         sort:true
 

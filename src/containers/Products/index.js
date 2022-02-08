@@ -15,12 +15,18 @@ const Products = (props) => {
     const [showBookModal, setBookModalShow] = useState(false);
     const [showReturnModal, setReturnModalShow] = useState(false);
 
+    const [productData, setProductData] = useState(null);
+
     const [bookingPostStatus, setBookingPostStatus] = useState(null)
     const [returnPostStatus, setReturnPostStatus] = useState(null)
 
     useEffect(() => {
         props.getProducts();
     }, []);
+
+    useEffect(() => {
+        setProductData(props.productData)
+    }, [props.productData])
 
     useEffect(() => {
         if (props.bookingSucess != null) {
@@ -61,11 +67,22 @@ const Products = (props) => {
         props.insertReturn(data)
     }
 
+    const handleSearch = (e) => {
+        if (productData && productData.length > 0) {
+            let newdata = props.productData.filter(item => {
+                return item.name.toLowerCase().includes(e.target.value)
+            })
+            setProductData(newdata);
+        }else{
+            setProductData(props.productData)
+        }
+    } 
+
     let productBlock = <Loader/>;
     let productActionBtnBlock;
 
-    if (props.productData) {
-        if (props.productData.length > 0 ) {
+    if (productData) {
+        if (productData.length > 0 ) {
             productActionBtnBlock = (
                 <ProductActionButton
                     onBookBtnClick={() => handleBookingClick()}
@@ -76,10 +93,11 @@ const Products = (props) => {
         }
         productBlock = (
             <>
-                <ProductsList productListData={props.productData}/>
+                <input type="text" className="form-control mb-5" onChange={(e) => handleSearch(e)}/>
+                <ProductsList productListData={productData}/>
                 {productActionBtnBlock}
                 <BookProductModal
-                    productListData={props.productData}
+                    productListData={productData}
                     bookMoladStatus={showBookModal}
                     onBookBtnClick={() => handleBookingClick()}
                     onBookDataSubmit={(data) => handleSubmitBookingData(data)}
@@ -87,7 +105,7 @@ const Products = (props) => {
                 ></BookProductModal>
 
                 <ReturnProductModal
-                    productListData={props.productData}
+                    productListData={productData}
                     returnMoladStatus={showReturnModal}
                     onReturnBtnClick={() => handleReturnClick()}
                     onRentalDataSubmit={(data) => handleSubmitRentalData(data)}
